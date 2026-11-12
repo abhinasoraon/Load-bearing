@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "json"
+    fields:
+      - { label: "Type", name: "kind", widget: "select", options: ["poem", "journal", "thought"] }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Image URL", name: "image", widget: "string", required: false, hint: "Paste a link to a hosted image, e.g. from postimages.org" }
+      - { label: "Writing", name: "excerpt", widget: "text" }
