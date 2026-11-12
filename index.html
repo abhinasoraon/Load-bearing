@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Load Bearing â€” Abhinas Kr Oraon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --paper:#FAF8F2; --ink:#1C2029; --blue:#2F4FD1; --graphite:#6B7280; --grid:#E7E3D8; --rule:#DEDACD; --card:#FFFFFF; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --paper:#15171F; --ink:#EDEBE3; --blue:#7C93F0; --graphite:#9A9FA8; --grid:#262A36; --rule:#2A2E3A; --card:#1B1E28; }
+  }
+  :root[data-theme="dark"]{ --paper:#15171F; --ink:#EDEBE3; --blue:#7C93F0; --graphite:#9A9FA8; --grid:#262A36; --rule:#2A2E3A; --card:#1B1E28; }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;}
+  body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;
+    padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  header.top{position:sticky;top:0;top:env(safe-area-inset-top,0px);background:var(--paper);border-bottom:1px solid var(--rule);z-index:10;}
+  .topbar{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;}
+  .brand{font-family:'Lora',serif;font-weight:600;font-size:16px;}
+  nav.links{display:flex;gap:20px;}
+  nav.links a{text-decoration:none;color:var(--graphite);font-size:14px;}
+  nav.links a:hover,nav.links a:focus-visible{color:var(--ink);}
+
+  .banner{position:relative;padding:64px 0 46px;text-align:center;
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px),linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:30px 30px;background-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom, black 82%, transparent 100%);mask-image:linear-gradient(to bottom, black 82%, transparent 100%);}
+  .banner h1{font-family:'Lora',serif;font-weight:600;font-size:clamp(32px,7vw,54px);letter-spacing:.5px;margin:0 0 12px;}
+  .banner p{color:var(--graphite);font-size:14.5px;max-width:46ch;margin:0 auto;line-height:1.6;}
+
+
+  .scene{max-width:900px;margin:-6px auto 0;padding:0 16px;}
+  .scene svg{display:block;width:100%;height:auto;overflow:visible;}
+  .scene path,.scene circle{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-width:1.7;}
+  .scene .s-ink{stroke:var(--ink);opacity:.82;}
+  .scene .s-graphite{stroke:var(--graphite);}
+  .scene .s-blue{stroke:var(--blue);}
+  .scene path.s-fill{fill:var(--paper);}
+  .scene .s-rule{stroke:var(--rule);stroke-width:1.5;}
+  .scene .s-thick{stroke-width:2.6;}
+  .scene .s-dots{stroke:var(--blue);stroke-width:2;stroke-dasharray:1 8;}
+  .scene .s-dots-blue{stroke:var(--blue);stroke-width:1.4;stroke-dasharray:3 6;opacity:.8;}
+  .scene .s-blue-fill{fill:var(--blue);stroke:none;}
+  .scene .gear{animation:spin 64s linear infinite;}
+  .scene .gear-b{animation:spin-rev 37.3s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes spin-rev{to{transform:rotate(-360deg);}}
+  @media (prefers-reduced-motion:reduce){.scene .gear{animation:none;}}
+
+  .layout{display:grid;grid-template-columns:1fr 260px;gap:36px;margin:36px 0 60px;align-items:start;}
+  @media (max-width:760px){ .layout{grid-template-columns:1fr;} .sidebar{order:2;} }
+
+  .filters{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap;align-items:center;}
+  .filters button{font-size:13.5px;padding:7px 14px;border-radius:100px;border:1px solid var(--rule);background:transparent;color:var(--graphite);cursor:pointer;}
+  .filters button:hover{border-color:var(--blue);color:var(--ink);}
+  .filters button.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  .post{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px;margin-bottom:18px;
+    display:grid;grid-template-columns:88px 1fr;gap:18px;cursor:pointer;}
+  .post.no-thumb{grid-template-columns:1fr;}
+  .post .thumb-wrap{position:relative;width:88px;height:88px;flex-shrink:0;}
+  .post .thumb{width:88px;height:88px;border-radius:8px;object-fit:cover;background:var(--grid);display:block;}
+  .post .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;
+    background:rgba(0,0,0,.35);border-radius:8px;pointer-events:none;}
+  .video-embed{position:relative;width:100%;padding-top:56.25%;margin-top:12px;border-radius:8px;overflow:hidden;background:#000;}
+  .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .post:not(.open) .video-embed{display:none;}
+  .post h2{font-family:'Lora',serif;font-weight:500;font-size:19px;margin:0 0 6px;line-height:1.35;color:var(--blue);}
+  .post .byline{font-size:12.5px;color:var(--graphite);margin:0 0 8px;}
+  .post .excerpt{font-size:14.5px;line-height:1.65;color:var(--ink);opacity:.88;margin:0;white-space:pre-line;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .post.open .excerpt{-webkit-line-clamp:unset;}
+  .post .excerpt.poem{font-style:italic;font-family:'Lora',serif;font-size:15px;}
+  .post .labels{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+  .post .labels span{font-size:11px;color:var(--blue);border:1px solid var(--blue);border-radius:4px;padding:2px 7px;}
+  .empty{padding:30px 0;color:var(--graphite);font-size:14px;}
+
+  .sidebar section{margin-bottom:28px;}
+  .sidebar h3{font-family:'Lora',serif;font-weight:600;font-size:14px;margin:0 0 12px;text-transform:uppercase;letter-spacing:.4px;color:var(--graphite);}
+  .sidebar .about-box{font-size:14px;line-height:1.65;color:var(--ink);opacity:.9;}
+  .sidebar ul{list-style:none;margin:0;padding:0;}
+  .sidebar li{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--rule);}
+  .sidebar li span.count{color:var(--graphite);}
+  .sidebar a.resume{display:inline-block;color:var(--blue);text-decoration:none;font-size:14px;margin-top:4px;}
+
+  .panel{border:1px solid var(--rule);border-radius:10px;padding:22px;margin:0 0 22px;background:var(--card);}
+  .panel h3{font-family:'Lora',serif;font-weight:500;font-size:18px;margin:0 0 16px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12.5px;color:var(--graphite);margin-bottom:6px;}
+  .field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:14.5px;padding:9px 11px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);}
+  .field textarea{min-height:120px;resize:vertical;line-height:1.6;}
+  .panel-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .btn-save{border:none;border-radius:6px;padding:10px 18px;background:var(--blue);color:#fff;font-size:14px;cursor:pointer;}
+  .btn-cancel{border:1px solid var(--rule);border-radius:6px;padding:10px 16px;background:transparent;color:var(--graphite);font-size:14px;cursor:pointer;}
+  .panel-status{font-size:13px;color:var(--graphite);}
+
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;}
+  footer .wrap{font-size:13px;color:var(--graphite);text-align:center;}
+  ::selection{background:var(--blue);color:#fff;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div id="app-root"><p style="text-align:center;padding:80px 20px;color:#6B7280;font-family:sans-serif;">Loadingâ€¦</p></div>
+<script type="application/json" id="posts-data">[{"kind":"poem","label":"Poem","date":"Sep 2026","title":"Tolerance","excerpt":"Every part I draw\nneeds a little room to move â€”\nplus or minus, never zero.\nI wonder who told me\nI wasn't allowed the same.","image":""},{"kind":"journal","label":"Journal","date":"Sep 2026","title":"The dryer finally converged","excerpt":"Three weeks of mesh errors and today the residuals just... settled. I sat there for a full minute before I let myself believe it. There's a particular quiet after a long simulation finishes â€” like a room after music stops.","image":""},{"kind":"thought","label":"Thought","date":"Aug 2026","title":"On starting over","excerpt":"Every model begins as a bad guess you refine. I think most things do.","image":""},{"kind":"poem","label":"Poem","date":"Aug 2026","title":"Boundary Condition","excerpt":"You ask where I end\nand the wall begins â€”\nI have run the numbers\nand still don't know.","image":""},{"kind":"thought","label":"Thought","date":"Jul 2026","title":"Two languages","excerpt":"Engineering taught me precision. Poetry is teaching me what to leave imprecise on purpose.","image":""}]</script>
+<script id="app-script">
+(function(){
+  // Fill in with "yourusername/yourreponame" once your GitHub repo is created:
+  const GITHUB_REPO = "abhinasoraon/Load-bearing";
+  const API_URL = GITHUB_REPO ? `https://api.github.com/repos/${GITHUB_REPO}/contents/content/posts` : "";
+
+  const KIND_LABEL = { poem: "Poem", journal: "Journal", thought: "Thought" };
+
+  function videoEmbedUrl(url){
+    if (!url) return '';
+    let m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{6,})/);
+    if (m) return `https://www.youtube.com/embed/${m[1]}`;
+    m = url.match(/vimeo\.com\/(\d+)/);
+    if (m) return `https://player.vimeo.com/video/${m[1]}`;
+    return '';
+  }
+  function videoThumb(url){
+    const m = (url||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{6,})/);
+    return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : '';
+  }
+  const AUTHOR = "Abhinas Kr Oraon";
+  let posts = [];
+  try { posts = JSON.parse(document.getElementById('posts-data').textContent) || []; } catch(e){ posts = []; }
+  let currentFilter = 'all';
+
+  function formatDate(iso){
+    try { return new Date(iso).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); }
+    catch(e){ return iso || ''; }
+  }
+
+  async function loadFromCMS(){
+    if (!API_URL) return;
+    try {
+      const listRes = await fetch(API_URL);
+      if (!listRes.ok) return;
+      const files = await listRes.json();
+      const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+      const entries = await Promise.all(jsonFiles.map(async f => {
+        const r = await fetch(f.download_url);
+        return r.json();
+      }));
+      const rows = entries
+        .filter(e => e.title && e.excerpt)
+        .map(e => ({
+          kind: (e.kind || 'thought'),
+          label: KIND_LABEL[e.kind] || e.kind,
+          date: formatDate(e.date),
+          rawDate: e.date || '',
+          title: e.title,
+          excerpt: e.excerpt,
+          image: e.image || '',
+          video: e.video || ''
+        }))
+        .sort((a,b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
+      if (rows.length){ posts = rows; renderShell(); }
+    } catch(e){ /* keep the built-in posts as fallback */ }
+  }
+
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function todayLabel(){ return new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); }
+  function counts(){
+    const c = { poem:0, journal:0, thought:0 };
+    posts.forEach(p=>{ if(c[p.kind]!==undefined) c[p.kind]++; });
+    return c;
+  }
+  function years(){
+    const set = new Set();
+    posts.forEach(p=>{ const m = p.date.match(/\d{4}/); if(m) set.add(m[0]); });
+    return Array.from(set).sort().reverse();
+  }
+
+  function renderShell(){
+    const c = counts();
+    const yrs = years();
+    const root = document.getElementById('app-root');
+    root.innerHTML = `
+      <header class="top">
+        <div class="topbar">
+          <div class="brand">${escapeHTML(AUTHOR)}</div>
+          <nav class="links"><a href="#work">Writing</a><a href="#about">About</a></nav>
+        </div>
+      </header>
+      <section class="banner">
+        <h1>Load Bearing</h1>
+        <p>A mechanical engineer's notebook â€” poems, journal entries, and stray thoughts, kept in the same place the simulations live.</p>
+      </section>
+      <div class="scene" aria-hidden="false">
+        <svg viewBox="0 0 900 250" role="img" aria-label="Line drawing: two gears turning, a person writing at a desk by a lamp, and mountains with pine trees under the sun" xmlns="http://www.w3.org/2000/svg">
+          <!-- ground -->
+          <path class="s-rule" d="M20 226 L880 226"/>
+
+          <!-- stack of books -->
+          <path class="s-ink s-fill" d="M268 226 L322 226 L322 214 L268 214 Z"/>
+          <path class="s-ink" d="M276 214 L276 226 M312 214 L312 226"/>
+          <path class="s-ink s-fill" d="M274 214 L318 214 L318 203 L274 203 Z"/>
+          <path class="s-blue" d="M282 203 L282 214 M290 203 L290 214"/>
+          <path class="s-ink s-fill" d="M270 203 L310 203 L310 193 L270 193 Z"/>
+          <path class="s-graphite" d="M278 198 L302 198"/>
+
+          <!-- machine thinking: meshing gears -->
+          <g class="gear gear-a" style="transform-origin:170px 140px">
+            <path class="s-ink" d="M205.2 117.1 L213.5 115.4 L216.8 122.5 L210.2 127.8 A42 42 0 0 1 211.9 137.7 L220.0 140.4 L219.3 148.3 L210.9 149.5 A42 42 0 0 1 207.5 159.0 L213.1 165.4 L208.6 171.8 L200.7 168.7 A42 42 0 0 1 192.9 175.2 L194.6 183.5 L187.5 186.8 L182.2 180.2 A42 42 0 0 1 172.3 181.9 L169.6 190.0 L161.7 189.3 L160.5 180.9 A42 42 0 0 1 151.0 177.5 L144.6 183.1 L138.2 178.6 L141.3 170.7 A42 42 0 0 1 134.8 162.9 L126.5 164.6 L123.2 157.5 L129.8 152.2 A42 42 0 0 1 128.1 142.3 L120.0 139.6 L120.7 131.7 L129.1 130.5 A42 42 0 0 1 132.5 121.0 L126.9 114.6 L131.4 108.2 L139.3 111.3 A42 42 0 0 1 147.1 104.8 L145.4 96.5 L152.5 93.2 L157.8 99.8 A42 42 0 0 1 167.7 98.1 L170.4 90.0 L178.3 90.7 L179.5 99.1 A42 42 0 0 1 189.0 102.5 L195.4 96.9 L201.8 101.4 L198.7 109.3 A42 42 0 0 1 205.2 117.1 Z"/>
+            <circle class="s-ink" cx="170" cy="140" r="7"/>
+            <path class="s-ink" d="M179.4 143.4 L198.2 150.3 M166.6 149.4 L159.7 168.2 M160.6 136.6 L141.8 129.7 M173.4 130.6 L180.3 111.8 "/>
+          </g>
+          <g class="gear gear-b" style="transform-origin:236.0px 109.2px">
+            <path class="s-blue" d="M226.1 130.0 L219.7 135.6 L213.3 130.4 L217.6 123.0 A23 23 0 0 1 213.6 114.5 L205.2 113.0 L205.3 104.7 L213.7 103.4 A23 23 0 0 1 217.9 95.0 L213.8 87.5 L220.4 82.4 L226.6 88.2 A23 23 0 0 1 235.9 86.2 L239.1 78.4 L247.2 80.3 L246.6 88.8 A23 23 0 0 1 253.9 94.8 L262.1 92.5 L265.6 100.0 L258.5 104.8 A23 23 0 0 1 258.4 114.2 L265.3 119.2 L261.6 126.6 L253.5 124.1 A23 23 0 0 1 246.1 129.9 L246.5 138.4 L238.4 140.1 L235.3 132.2 A23 23 0 0 1 226.1 130.0 Z"/>
+            <circle class="s-blue" cx="236.0" cy="109.2" r="5"/>
+            <path class="s-blue" d="M245.8 111.0 L251.7 112.0 M229.6 116.9 L225.7 121.5 M232.6 99.8 L230.5 94.2 "/>
+          </g>
+
+          <!-- thought trail from the writer to the gears -->
+          <path class="s-dots" d="M388 86 C 362 44, 322 52, 292 88"/>
+          <circle class="s-blue-fill" cx="290" cy="90" r="2.4"/>
+
+          <g transform="translate(-24 0) translate(376 226) scale(1.15) translate(-376 -226)">
+          <!-- the writer -->
+          <path class="s-ink" d="M376 196 L424 196 M376 196 L371 140 M380 196 L378 226 M420 196 L422 226"/>
+          <path class="s-ink" d="M396 192 C 394 170, 398 154, 408 141"/>
+          <circle class="s-ink" cx="417" cy="120" r="13"/>
+          <path class="s-ink" d="M396 192 L440 192 L444 226 L457 226"/>
+          <path class="s-ink" d="M408 144 L430 164 L451 160"/>
+          <path class="s-blue" d="M451 160 L459 171"/>
+
+          <!-- desk, paper and lamp -->
+          <path class="s-ink s-thick" d="M430 172 L562 172"/>
+          <path class="s-ink" d="M438 172 L438 226 M554 172 L554 226"/>
+          <path class="s-ink" d="M448 172 L506 172 L511 166 L453 166 Z"/>
+          <path class="s-ink" d="M543 172 L543 132 L520 120"/>
+          <path class="s-ink" d="M506 110 L530 124 L522 132 L498 118 Z"/>
+          <path class="s-dots-blue" d="M502 128 L479 166 M518 133 L508 164"/>
+
+          <!-- tea cup -->
+          <path class="s-ink" d="M524 160 L526 171 L536 171 L538 160 Z"/>
+          <path class="s-ink" d="M524 162 q-6 0 -6 4 q0 3 5 3"/>
+          <path class="s-graphite" d="M528 155 q-3 -4 0 -7 q3 -3 0 -6 M534 155 q-3 -4 0 -7 q3 -3 0 -6"/>
+        </g>
+
+          <!-- nature: sun, birds, mountains, pines -->
+          <circle class="s-blue" cx="805" cy="58" r="16"/>
+          <path class="s-blue" d="M828.0 58.0 L835.0 58.0 M823.6 71.5 L829.3 75.6 M812.1 79.9 L814.3 86.5 M797.9 79.9 L795.7 86.5 M786.4 71.5 L780.7 75.6 M782.0 58.0 L775.0 58.0 M786.4 44.5 L780.7 40.4 M797.9 36.1 L795.7 29.5 M812.1 36.1 L814.3 29.5 M823.6 44.5 L829.3 40.4 "/>
+          <path class="s-graphite" d="M650 54 q6 -8 12 0 q6 -8 12 0 M676 74 q4 -6 8 0 q4 -6 8 0"/>
+          <path class="s-graphite" d="M590 226 L660 128 L696 174 L740 100 L810 226"/>
+          <path class="s-graphite" d="M724 120 L731 126 L738 115 L746 126 L754 119"/>
+          <path class="s-graphite s-fill" d="M772 226 L832 150 L884 226"/>
+          <g>
+            <path class="s-ink s-fill" d="M618 142 L600 174 L610 174 L594 202 L606 202 L588 216 L648 216 L630 202 L642 202 L626 174 L636 174 Z"/>
+            <path class="s-ink" d="M618 216 L618 226"/>
+          </g>
+          <g transform="translate(668 226) scale(.68) translate(-618 -226)">
+            <path class="s-ink s-fill" d="M618 142 L600 174 L610 174 L594 202 L606 202 L588 216 L648 216 L630 202 L642 202 L626 174 L636 174 Z"/>
+            <path class="s-ink" d="M618 216 L618 226"/>
+          </g>
+        </svg>
+      </div>
+      <main class="wrap" id="work">
+        <div class="layout">
+          <div class="main-col">
+            <div class="filters" id="filters" role="tablist" aria-label="Filter posts">
+              <button data-filter="all" class="active">All</button>
+              <button data-filter="poem">Poems</button>
+              <button data-filter="journal">Journal</button>
+              <button data-filter="thought">Thoughts</button>
+            </div>
+            <section id="list"></section>
+          </div>
+          <aside class="sidebar">
+            <section>
+              <h3>About</h3>
+              <div class="about-box">Mechanical engineer by day, building simulations. This notebook is where the rest of it goes.
+              <br><br><a class="resume" href="#">Read my rÃ©sumÃ© â†’</a></div>
+            </section>
+            <section>
+              <h3>Labels</h3>
+              <ul>
+                <li><span>Poems</span><span class="count">${c.poem}</span></li>
+                <li><span>Journal</span><span class="count">${c.journal}</span></li>
+                <li><span>Thoughts</span><span class="count">${c.thought}</span></li>
+              </ul>
+            </section>
+            <section>
+              <h3>Archive</h3>
+              <ul>${yrs.map(y=>`<li><span>${y}</span><span class="count">${posts.filter(p=>p.date.includes(y)).length}</span></li>`).join('')}</ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      <footer id="about"><div class="wrap">Notes & Verses â€” a personal notebook.</div></footer>
+    `;
+    document.querySelectorAll('#filters button[data-filter]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('#filters button[data-filter]').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderList();
+      });
+    });
+    renderList();
+  }
+
+  function renderList(){
+    const listEl = document.getElementById('list');
+    const filtered = posts.filter(p => currentFilter === 'all' || p.kind === currentFilter);
+    if (!filtered.length){ listEl.innerHTML = '<p class="empty">Nothing here yet.</p>'; return; }
+    listEl.innerHTML = filtered.map((p,i) => {
+      const thumbSrc = p.image || videoThumb(p.video);
+      const hasThumb = !!thumbSrc;
+      const embedUrl = videoEmbedUrl(p.video);
+      return `
+      <article class="post ${hasThumb ? '' : 'no-thumb'}" data-idx="${i}">
+        ${hasThumb ? `<div class="thumb-wrap"><img class="thumb" src="${escapeHTML(thumbSrc)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">${p.video ? '<span class="play">â–¶</span>' : ''}</div>` : ''}
+        <div>
+          <h2>${escapeHTML(p.title)}</h2>
+          <p class="byline">By ${escapeHTML(AUTHOR)} Â· ${escapeHTML(p.date)}</p>
+          <p class="excerpt${p.kind==='poem' ? ' poem' : ''}">${escapeHTML(p.excerpt)}</p>
+          ${embedUrl ? `<div class="video-embed"><iframe src="${embedUrl}" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>` : ''}
+          <div class="labels"><span>${escapeHTML(p.label || KIND_LABEL[p.kind] || p.kind)}</span></div>
+        </div>
+      </article>
+    `;}).join('');
+    listEl.querySelectorAll('.post').forEach(el=>{
+      el.addEventListener('click', (ev)=>{
+        if (ev.target.closest('iframe')) return;
+        el.classList.toggle('open');
+      });
+    });
+  }
+
+  function init(){
+    renderShell();
+    loadFromCMS();
+  }
+
+  if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
+})();
+</script>
+</body>
+</html>
