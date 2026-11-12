@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Load Bearing â€” Abhinas Kr Oraon</title>
+<title>Load Bearing &#8212; Abhinas Kr Oraon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -107,8 +107,8 @@
 </style>
 </head>
 <body>
-<div id="app-root"><p style="text-align:center;padding:80px 20px;color:#6B7280;font-family:sans-serif;">Loadingâ€¦</p></div>
-<script type="application/json" id="posts-data">[{"kind":"poem","label":"Poem","date":"Sep 2026","title":"Tolerance","excerpt":"Every part I draw\nneeds a little room to move â€”\nplus or minus, never zero.\nI wonder who told me\nI wasn't allowed the same.","image":""},{"kind":"journal","label":"Journal","date":"Sep 2026","title":"The dryer finally converged","excerpt":"Three weeks of mesh errors and today the residuals just... settled. I sat there for a full minute before I let myself believe it. There's a particular quiet after a long simulation finishes â€” like a room after music stops.","image":""},{"kind":"thought","label":"Thought","date":"Aug 2026","title":"On starting over","excerpt":"Every model begins as a bad guess you refine. I think most things do.","image":""},{"kind":"poem","label":"Poem","date":"Aug 2026","title":"Boundary Condition","excerpt":"You ask where I end\nand the wall begins â€”\nI have run the numbers\nand still don't know.","image":""},{"kind":"thought","label":"Thought","date":"Jul 2026","title":"Two languages","excerpt":"Engineering taught me precision. Poetry is teaching me what to leave imprecise on purpose.","image":""}]</script>
+<div id="app-root"><p style="text-align:center;padding:80px 20px;color:#6B7280;font-family:sans-serif;">Loading&#8230;</p></div>
+<script type="application/json" id="posts-data">[{"kind":"poem","label":"Poem","date":"Sep 2026","title":"Tolerance","excerpt":"Every part I draw\nneeds a little room to move \u2014\nplus or minus, never zero.\nI wonder who told me\nI wasn't allowed the same.","image":""},{"kind":"journal","label":"Journal","date":"Sep 2026","title":"The dryer finally converged","excerpt":"Three weeks of mesh errors and today the residuals just... settled. I sat there for a full minute before I let myself believe it. There's a particular quiet after a long simulation finishes \u2014 like a room after music stops.","image":""},{"kind":"thought","label":"Thought","date":"Aug 2026","title":"On starting over","excerpt":"Every model begins as a bad guess you refine. I think most things do.","image":""},{"kind":"poem","label":"Poem","date":"Aug 2026","title":"Boundary Condition","excerpt":"You ask where I end\nand the wall begins \u2014\nI have run the numbers\nand still don't know.","image":""},{"kind":"thought","label":"Thought","date":"Jul 2026","title":"Two languages","excerpt":"Engineering taught me precision. Poetry is teaching me what to leave imprecise on purpose.","image":""}]</script>
 <script id="app-script">
 (function(){
   // Fill in with "yourusername/yourreponame" once your GitHub repo is created:
@@ -195,7 +195,7 @@
       </header>
       <section class="banner">
         <h1>Load Bearing</h1>
-        <p>A mechanical engineer's notebook â€” poems, journal entries, and stray thoughts, kept in the same place the simulations live.</p>
+        <p>A mechanical engineer's notebook &#8212; poems, journal entries, and stray thoughts, kept in the same place the simulations live.</p>
       </section>
       <div class="scene" aria-hidden="false">
         <svg viewBox="0 0 900 250" role="img" aria-label="Line drawing: two gears turning, a person writing at a desk by a lamp, and mountains with pine trees under the sun" xmlns="http://www.w3.org/2000/svg">
@@ -281,7 +281,7 @@
             <section>
               <h3>About</h3>
               <div class="about-box">Mechanical engineer by day, building simulations. This notebook is where the rest of it goes.
-              <br><br><a class="resume" href="#">Read my rÃ©sumÃ© â†’</a></div>
+              <br><br><a class="resume" href="#">Read my r&#233;sum&#233; &#8594;</a></div>
             </section>
             <section>
               <h3>Labels</h3>
@@ -298,7 +298,7 @@
           </aside>
         </div>
       </main>
-      <footer id="about"><div class="wrap">Notes & Verses â€” a personal notebook.</div></footer>
+      <footer id="about"><div class="wrap">Notes & Verses &#8212; a personal notebook.</div></footer>
     `;
     document.querySelectorAll('#filters button[data-filter]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
@@ -321,10 +321,10 @@
       const embedUrl = videoEmbedUrl(p.video);
       return `
       <article class="post ${hasThumb ? '' : 'no-thumb'}" data-idx="${i}">
-        ${hasThumb ? `<div class="thumb-wrap"><img class="thumb" src="${escapeHTML(thumbSrc)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">${p.video ? '<span class="play">â–¶</span>' : ''}</div>` : ''}
+        ${hasThumb ? `<div class="thumb-wrap"><img class="thumb" src="${escapeHTML(thumbSrc)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">${p.video ? '<span class="play">&#9654;</span>' : ''}</div>` : ''}
         <div>
           <h2>${escapeHTML(p.title)}</h2>
-          <p class="byline">By ${escapeHTML(AUTHOR)} Â· ${escapeHTML(p.date)}</p>
+          <p class="byline">By ${escapeHTML(AUTHOR)} &#183; ${escapeHTML(p.date)}</p>
           <p class="excerpt${p.kind==='poem' ? ' poem' : ''}">${escapeHTML(p.excerpt)}</p>
           ${embedUrl ? `<div class="video-embed"><iframe src="${embedUrl}" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>` : ''}
           <div class="labels"><span>${escapeHTML(p.label || KIND_LABEL[p.kind] || p.kind)}</span></div>
