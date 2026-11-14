@@ -108,12 +108,9 @@
 </head>
 <body>
 <div id="app-root"><p style="text-align:center;padding:80px 20px;color:#6B7280;font-family:sans-serif;">Loading&#8230;</p></div>
-<script type="application/json" id="posts-data">[{"kind":"poem","label":"Poem","date":"Sep 2026","title":"Tolerance","excerpt":"Every part I draw\nneeds a little room to move \u2014\nplus or minus, never zero.\nI wonder who told me\nI wasn't allowed the same.","image":""},{"kind":"journal","label":"Journal","date":"Sep 2026","title":"The dryer finally converged","excerpt":"Three weeks of mesh errors and today the residuals just... settled. I sat there for a full minute before I let myself believe it. There's a particular quiet after a long simulation finishes \u2014 like a room after music stops.","image":""},{"kind":"thought","label":"Thought","date":"Aug 2026","title":"On starting over","excerpt":"Every model begins as a bad guess you refine. I think most things do.","image":""},{"kind":"poem","label":"Poem","date":"Aug 2026","title":"Boundary Condition","excerpt":"You ask where I end\nand the wall begins \u2014\nI have run the numbers\nand still don't know.","image":""},{"kind":"thought","label":"Thought","date":"Jul 2026","title":"Two languages","excerpt":"Engineering taught me precision. Poetry is teaching me what to leave imprecise on purpose.","image":""}]</script>
+<script type="application/json" id="posts-data">[]</script>
 <script id="app-script">
 (function(){
-  // Fill in with "yourusername/yourreponame" once your GitHub repo is created:
-  const GITHUB_REPO = "abhinasoraon/Load-bearing";
-  const API_URL = GITHUB_REPO ? `https://api.github.com/repos/${GITHUB_REPO}/contents/content/posts` : "";
 
   const KIND_LABEL = { poem: "Poem", journal: "Journal", thought: "Thought" };
 
@@ -140,16 +137,10 @@
   }
 
   async function loadFromCMS(){
-    if (!API_URL) return;
     try {
-      const listRes = await fetch(API_URL);
-      if (!listRes.ok) return;
-      const files = await listRes.json();
-      const jsonFiles = files.filter(f => f.name.endsWith('.json'));
-      const entries = await Promise.all(jsonFiles.map(async f => {
-        const r = await fetch(f.download_url);
-        return r.json();
-      }));
+      const res = await fetch('posts.json', { cache: 'no-cache' });
+      if (!res.ok) return;
+      const entries = await res.json();
       const rows = entries
         .filter(e => e.title && e.excerpt)
         .map(e => ({
@@ -163,8 +154,9 @@
           video: e.video || ''
         }))
         .sort((a,b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
-      if (rows.length){ posts = rows; renderShell(); }
-    } catch(e){ /* keep the built-in posts as fallback */ }
+      posts = rows;
+      renderShell();
+    } catch(e){ /* page stays empty rather than showing wrong posts */ }
   }
 
   function escapeHTML(s){
