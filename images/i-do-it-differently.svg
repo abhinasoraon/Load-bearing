@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3D3C2"/>
+      <stop offset="1" stop-color="#FFF4E3"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#dawn)"/>
+  <circle cx="272" cy="136" r="72" fill="#F8C98B" opacity=".28"/>
+  <circle cx="272" cy="136" r="44" fill="#F8C98B" opacity=".92"/>
+  <path d="M0 252 C 60 216, 120 206, 170 234 C 215 258, 262 216, 322 226 C 360 233, 385 246, 400 240 L400 400 L0 400 Z" fill="#DAD3EC"/>
+  <path d="M0 400 L0 332 C 60 304, 130 274, 190 218 C 220 192, 246 168, 270 163 C 302 158, 342 192, 400 252 L400 400 Z" fill="#8FA6DA"/>
+  <path d="M0 400 L0 378 C 70 366, 130 384, 186 400 Z" fill="#6E88CE"/>
+  <path d="M152 400 C 192 372, 122 342, 177 314 C 227 290, 172 262, 217 234 C 242 217, 240 197, 264 172" stroke="#FAF3E6" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M152 400 C 192 372, 122 342, 177 314 C 227 290, 172 262, 217 234 C 242 217, 240 197, 264 172" stroke="#2F4FD1" stroke-width="1.6" stroke-dasharray="4 7" stroke-linecap="round" fill="none"/>
+  <g transform="translate(264 166)" stroke="#1C2029" stroke-width="2.6" stroke-linecap="round" fill="none">
+    <circle cx="0" cy="-28" r="5.5" fill="#1C2029"/>
+    <path d="M0 -22 L0 -8 M0 -19 L-10 -28 M0 -19 L10 -30 M0 -8 L-6 3 M0 -8 L6 3"/>
+  </g>
+  <g stroke="#6B7280" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".75">
+    <circle cx="56" cy="352" r="4.2" fill="#6B7280"/>
+    <path d="M56 357 L56 366 L66 366 M56 366 L56 372"/>
+    <circle cx="92" cy="358" r="4.2" fill="#6B7280"/>
+    <path d="M92 363 L92 372 L102 372"/>
+  </g>
+  <path d="M302 400 C 320 389, 348 389, 366 400 Z" fill="#5F78C0"/>
+  <path d="M334 392 C 334 380, 336 372, 340 362" stroke="#4F8A4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <path d="M340 362 C 326 355, 319 366, 325 373 C 333 374, 339 369, 340 362 Z" fill="#7BA66E"/>
+  <path d="M340 362 C 354 353, 362 364, 356 372 C 348 375, 342 369, 340 362 Z" fill="#8CB47A"/>
+</svg>
